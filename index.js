@@ -1,8 +1,10 @@
 const express = require('express');
+const cors = require("cors");
 const app = express();
 const PORT = 3000;
 
 // Middleware для парсинга JSON
+app.use(cors());
 app.use(express.json());
 
 app.get("/", (req, res) => {
@@ -21,7 +23,6 @@ app.get("/quizes", (req, res) => {
         }
     ];
     console.log("Пришел запрос", req);
-    res.header("Access-Control-Allow-Origin", "*");
     res.json({quizes});
 });
 
