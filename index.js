@@ -4,7 +4,9 @@ const app = express();
 const PORT = 3000;
 
 // Middleware для парсинга JSON
-app.use(cors());
+app.use(cors({
+    origin : "*"
+}));
 app.use(express.json());
 
 app.get("/", (req, res) => {
