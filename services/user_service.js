@@ -10,6 +10,11 @@ class UserService{
         return true;
     };
 
+    async get_all(){
+        const users = await this.user_repository.get_all();
+        return users.map(user => ({ id: user.id, nickname : user.nickname }));
+    }
+
 }
 
 module.exports = UserService;

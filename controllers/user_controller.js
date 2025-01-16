@@ -14,6 +14,13 @@ class UserController{
                 return res.status(403).json({message : err.message});
             })
     }
+
+    get_all(req, res){
+        this.user_service.get_all()
+            .then(result => {
+                return res.status(200).json(result)
+            })
+    }
 }
 
 module.exports = UserController;
