@@ -5,7 +5,7 @@ class UserService{
     
     async register(nickname, password){
         const same = await this.user_repository.check_same_nickname(nickname);
-        if(same) throw new Error("Пользователь с таким никнеймом уже есть");
+        if(same) return Promise.reject(new Error("Пользователь с таким никнеймом уже есть"));
         await this.user_repository.create(nickname, password);
         return true;
     };

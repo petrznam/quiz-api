@@ -51,7 +51,7 @@ const user_repo = new UserRepository(connection);
 const user_service = new UserService(user_repo);
 const user_controller = new UserController(user_service);
 
-app.post("/register", user_controller.register);
+app.post("/register", user_controller.register.bind(user_controller));
 
 app.listen(PORT, () => {
     console.log("сервер запущен")

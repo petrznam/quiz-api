@@ -6,7 +6,13 @@ class UserController{
     register(req, res){
         const { nickname, password } = req.body;
         if(!nickname || !password) res.json({message : "Никнейм и пароль обязательны!"}, 400);
-        res.json({message : "Регистрация прошла"}, 201);
+        this.user_service.register(nickname, password)
+            .then(() => {
+                return res.status(201).json({message : "Регистрация прошла"});
+            })
+            .catch(err => {
+                return res.status(403).json({message : err.message});
+            })
     }
 }
 
