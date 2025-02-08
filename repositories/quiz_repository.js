@@ -8,6 +8,12 @@ class QuizRepository{
         // await this.connection.end()
         return quizes;
       }
+      async create(title, description, category_id, author_id){
+        const quizes = [title, description, category_id, author_id];
+        const sql = "INSERT INTO quizes (title, description, category_id, author_id) VALUES (?, ?, ?, ?)";
+        const result = await this.connection.query(sql, quizes);
+        return result;
+      }
 }
 
 module.exports = QuizRepository;

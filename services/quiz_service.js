@@ -7,6 +7,10 @@ class QuizService{
         const quizes = await this.quiz_repository.get_all();
         return quizes;
     }
+    async create(title, discription, category_id, author_id){
+        await this.quiz_repository.create(title, discription, category_id, author_id);
+        return true;
+    }
 }
 
 module.exports = QuizService;

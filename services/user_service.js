@@ -15,6 +15,15 @@ class UserService{
         return users.map(user => ({ id: user.id, nickname : user.nickname }));
     }
 
+    async authorization(nickname, password){
+        if(await this.user_repository.check_same_nickname(nickname)){
+            const user = await this.user_repository.get_user_by_nickname(nickname);
+            if(user.password !== password) return Promise.reject(new Error("Неверный пароль"));
+            return true;
+        }
+        return Promise.reject(new Error("Пользователя с таким никнеймом не существует"));
+    }
+
 }
 
 module.exports = UserService;

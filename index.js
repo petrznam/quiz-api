@@ -33,9 +33,11 @@ const user_controller = new UserController(user_service);
 const quiz_controller = new QuizController(quiz_service);
 
 app.post("/register", user_controller.register.bind(user_controller));
+app.post("/auth", user_controller.authorization.bind(user_controller));
 app.get("/users", user_controller.get_all.bind(user_controller));
 
 app.get("/quizes", quiz_controller.get_all.bind(quiz_controller));
+app.post("/quizes", quiz_controller.create.bind(quiz_controller));
 
 app.listen(PORT, () => {
     console.log("сервер запущен")

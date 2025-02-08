@@ -21,6 +21,14 @@ class UserController{
                 return res.status(200).json(result)
             })
     }
+
+    authorization(req, res){
+        const { nickname, password } = req.body;
+        if(!nickname || !password) res.json({message : "Никнейм и пароль обязательны!"}, 400);
+        this.user_service.authorization(nickname, password)
+            .then(() => res.status(200).json({message : "Авторизация успешно прошла"}))
+            .catch((err) => res.status(403).json({message : err.message}))
+    }
 }
 
 module.exports = UserController;

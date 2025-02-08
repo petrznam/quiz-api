@@ -24,6 +24,12 @@ class UserRepoository{
       return users.length !== 0;
     }
 
+
+    async get_user_by_nickname(nickname){
+      const sql = "SELECT * FROM users WHERE nickname = ?";
+      const [users, fields] = await this.connection.query(sql, [nickname]);
+      return users[0];
+    }
 }
 
 module.exports = UserRepoository;
