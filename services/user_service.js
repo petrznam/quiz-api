@@ -1,3 +1,7 @@
+const jwt = require("jsonwebtoken");
+const sign = jwt.sign;
+const secret = "999abc";
+
 class UserService{
     constructor(user_repository){
         this.user_repository = user_repository;
@@ -19,7 +23,8 @@ class UserService{
         if(await this.user_repository.check_same_nickname(nickname)){
             const user = await this.user_repository.get_user_by_nickname(nickname);
             if(user.password !== password) return Promise.reject(new Error("Неверный пароль"));
-            return true;
+            const token = sign({id: user.id}, secret, {expiresIn : "7d"});
+            return token;
         }
         return Promise.reject(new Error("Пользователя с таким никнеймом не существует"));
     }

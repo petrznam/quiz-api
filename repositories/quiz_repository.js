@@ -14,6 +14,11 @@ class QuizRepository{
         const result = await this.connection.query(sql, quizes);
         return result;
       }
+      async get_by_id(quiz_id){
+        const sql = "SELECT * FROM quizes WHERE id = ?";
+        const [result, fields] = await this.connection.query(sql, [quiz_id]);
+        return result[0];
+      }
 }
 
 module.exports = QuizRepository;
