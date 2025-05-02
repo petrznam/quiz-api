@@ -3,8 +3,8 @@ class UserRepoository{
         this.connection = connection;
     }
     
-    async create(nickname, password){
-        const user = [nickname, password];
+    async create(nickname, password, id){
+        const user = [nickname, password, id];
         const sql = "INSERT INTO users (nickname, password) VALUES (?, ?)";
         const result = await this.connection.query(sql, user);
         // await this.connection.end()
@@ -29,6 +29,11 @@ class UserRepoository{
       const sql = "SELECT * FROM users WHERE nickname = ?";
       const [users, fields] = await this.connection.query(sql, [nickname]);
       return users[0];
+    }
+    async get_user_by_id(user_id){
+      const sql = "SELECT * FROM users WHERE id = ?";
+      const [result, fields] = await this.connection.query(sql, [user_id]);
+      return result[0];
     }
 }
 

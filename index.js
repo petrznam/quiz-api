@@ -38,6 +38,7 @@ const quiz_controller = new QuizController(quiz_service);
 app.post("/register", user_controller.register.bind(user_controller));
 app.post("/auth", user_controller.authorization.bind(user_controller));
 app.get("/users", user_controller.get_all.bind(user_controller));
+app.get("/me", auth, user_controller.me.bind(user_controller))
 
 app.get("/quizes", quiz_controller.get_all.bind(quiz_controller));
 app.post("/quizes", auth, quiz_controller.create_quiz.bind(quiz_controller));

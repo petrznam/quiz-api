@@ -29,6 +29,11 @@ class UserController{
             .then((token) => res.status(200).json({token}))
             .catch((err) => res.status(403).json({message : err.message}))
     }
+    me(req, res){
+        this.user_service.get_user_by_id(req.user.id)
+        .then((user)=> res.status(200).json({user}))
+
+    }
 }
 
 module.exports = UserController;

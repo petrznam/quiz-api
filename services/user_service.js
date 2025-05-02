@@ -29,6 +29,11 @@ class UserService{
         return Promise.reject(new Error("Пользователя с таким никнеймом не существует"));
     }
 
+    async get_user_by_id(user_id){
+        const user = await this.user_repository.get_user_by_id(user_id);
+        return user;
+    }
+
 }
 
 module.exports = UserService;
